@@ -22,11 +22,11 @@ phases:
       - TASK_DEFINITION=$(aws ecs describe-task-definition --task-definition saurav-ecs-task-def --region $AWS_DEFAULT_REGION)
       - echo $TASK_DEFINITION | jq '.taskDefinition' | jq 'del(.taskDefinitionArn, .revision, .status, .requiresAttributes, .compatibilities, .registeredAt, .registeredBy)' | jq '.containerDefinitions[0].image="<IMAGE1_NAME>"' > taskdef.json
       - echo Writing image definitions file...
-      - printf '[{"name":"%s","imageUri":"%s"}]' $CONTAINER_NAME $REPOSITORY_URI:$IMAGE_TAG > imagedefinitions.json
+      - printf '{"ImageURI":"%s"}' $REPOSITORY_URI:$IMAGE_TAG > imageDetail.json
 
 artifacts:
   files:
-    - imagedefinitions.json
+    - imageDetail.json
     - appspec.yaml
     - taskdef.json
   discard-paths: yes
