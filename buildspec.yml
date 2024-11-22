@@ -27,4 +27,6 @@ artifacts:
   files:
     - imagedefinitions.json
     - appspec.yaml
-  discard-paths: yes
+    - '**/*'
+  discard-paths: no
+  base-directory: '.'
